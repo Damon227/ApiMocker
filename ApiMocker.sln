@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMockerApplication", "ApiMockerApplication\ApiMockerApplication.csproj", "{B6077F81-690A-4E24-9C26-B6B4C9863A57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMocker.Services", "ApiMocker.Services\ApiMocker.Services.csproj", "{753B97E6-266B-41B1-B816-91478910CF47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMocker.Services.Interfaces", "ApiMocker.Services.Interfaces\ApiMocker.Services.Interfaces.csproj", "{EBE2D971-0637-4A2F-831C-927FC0E7CCDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6077F81-690A-4E24-9C26-B6B4C9863A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6077F81-690A-4E24-9C26-B6B4C9863A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6077F81-690A-4E24-9C26-B6B4C9863A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6077F81-690A-4E24-9C26-B6B4C9863A57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{753B97E6-266B-41B1-B816-91478910CF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{753B97E6-266B-41B1-B816-91478910CF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{753B97E6-266B-41B1-B816-91478910CF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{753B97E6-266B-41B1-B816-91478910CF47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE2D971-0637-4A2F-831C-927FC0E7CCDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE2D971-0637-4A2F-831C-927FC0E7CCDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE2D971-0637-4A2F-831C-927FC0E7CCDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE2D971-0637-4A2F-831C-927FC0E7CCDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40ADFB35-C9C0-42D6-A023-8E5BD6B4423E}
+	EndGlobalSection
+EndGlobal
