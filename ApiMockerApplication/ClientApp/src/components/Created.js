@@ -60,30 +60,48 @@ export class Created extends Component {
         return (
             <div>
                 <h1>添加接口信息</h1>
-                <table>
-                    <tbody>
+                <div>
+                    <label>接口名称：</label>
+                    <input type="text" name="apiName" placeholder="示例：api/messages/get" value={this.state.apiName} onChange={this.changeValue} />
+                </div>
+                <div>
+                    <label>接口描述：</label>
+                    <input type="text" name="apiDescription" placeholder="请输入该接口的描述信息" value={this.state.apiDescription} onChange={this.changeValue} />
+                </div>
+                <div>
+                    <label>接口方法：</label>
+                    <input type="text" name="apiMethod" placeholder="填写GET/POST/PUT/DELETE中的任意一个" value={this.state.apiMethod} onChange={this.changeValue} />
+                </div>
+                <div>
+                    <label>请求参数：</label>
+                    <table>
+                        <tbody>
                         <tr>
-                            <td>接口名称：</td>
-                            <td><input type="text" name="apiName" placeholder="示例：api/messages/get" value={this.state.apiName} onChange={this.changeValue} /></td>
-                        </tr>
-                        <tr>
-                            <td>接口描述：</td>
-                            <td><input type="text" name="apiDescription" placeholder="请输入该接口的描述信息" value={this.state.apiDescription} onChange={this.changeValue} /></td>
-                        </tr>
-                        <tr>
-                            <td>接口方法：</td>
-                            <td><input type="text" name="apiMethod" placeholder="填写GET/POST/PUT/DELETE中的任意一个" value={this.state.apiMethod} onChange={this.changeValue} /></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">请求参数：</td>
                             <th>字段名</th>
                             <th>字段类型</th>
                             <th>字段说明</th>
                         </tr>
                         <tr>
-                            <td><input/></td>
-                            <td><input/></td>
-                            <td><input/></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                        </tr>
+                        <tr>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <label>返回内容：</label>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>字段名</th>
+                            <th>字段类型</th>
+                            <th>字段说明</th>
                         </tr>
                         <tr>
                             <td><input /></td>
@@ -91,12 +109,13 @@ export class Created extends Component {
                             <td><input /></td>
                         </tr>
                         <tr>
-                            <td>返回内容：</td>
-                            <td><input type="text" name="apiResponseFormat" placeholder="接口返回内容的格式" value={this.state.apiResponseFormat} onChange={this.changeValue} /></td>
+                            <td><input /></td>
+                            <td><input /></td>
+                            <td><input /></td>
                         </tr>
-                    </tbody>
-                </table>
-              
+                        </tbody>
+                    </table>
+                </div>
                 <button className="btn btn-primary" onClick={this.add}>添加</button>
             </div>
         );
