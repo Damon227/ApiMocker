@@ -30,7 +30,7 @@ namespace ApiMocker.Services
                 Description = "获取消息列表",
                 ApiMethod = "GET",
                 RequestFormats = null,
-                ResponseFormat = "{\"messageId\":\"12001\",\"title\":\"账单通知\",\"content\":\"这是消息内容\",\"time\":\"2019-01-01 12:12:42\"}"
+                ResponseFormats = "{\"messageId\":\"12001\",\"title\":\"账单通知\",\"content\":\"这是消息内容\",\"time\":\"2019-01-01 12:12:42\"}"
             });
             data.TryAdd("api/messages/send", new ApiMockInfo
             {
@@ -38,13 +38,13 @@ namespace ApiMocker.Services
                 Description = "发送消息",
                 ApiMethod = "POST",
                 RequestFormats = null,
-                ResponseFormat = "{\"messageId\":\"12001\",\"title\":\"账单通知\",\"content\":\"这是消息内容\",\"time\":\"2019-01-01 12:12:42\"}"
+                ResponseFormats = "{\"messageId\":\"12001\",\"title\":\"账单通知\",\"content\":\"这是消息内容\",\"time\":\"2019-01-01 12:12:42\"}"
             });
 
             return data;
         }
 
-        public Task<ApiMockInfo> CreateAsync(string name, string description, string apiMethod, List<RequestFormat> requestFormats, string responseFormat)
+        public Task<ApiMockInfo> CreateAsync(string name, string description, string apiMethod, List<FieldFormat> requestFormats, List<FieldFormat> responseFormats)
         {
             if (!s_db.TryGetValue(name, out ApiMockInfo _))
             {
@@ -54,7 +54,7 @@ namespace ApiMocker.Services
                     Description = description,
                     ApiMethod = apiMethod,
                     RequestFormats = JsonConvert.SerializeObject(requestFormats),
-                    ResponseFormat = responseFormat
+                    ResponseFormats = JsonConvert.SerializeObject(responseFormats)
                 };
                 s_db.AddOrUpdate(name, info, (a, b) => info);
 

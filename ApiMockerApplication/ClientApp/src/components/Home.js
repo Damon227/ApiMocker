@@ -30,8 +30,8 @@ export class Home extends Component {
                    <td>{item.name}</td>
                    <td>{item.description}</td>
                    <td>{item.apiMethod}</td>
-                   <td>{item.requestFormat}</td>
-                   <td>{item.responseFormat}</td>
+                   <td>{item.requestFormats}</td>
+                   <td>{item.responseFormats}</td>
                 </tr>
            );
        });

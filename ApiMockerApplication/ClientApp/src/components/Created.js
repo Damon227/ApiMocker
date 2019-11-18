@@ -1,29 +1,46 @@
 ﻿import React, { Component } from 'react';
 import axios from 'axios';
 
+let i = 1,j = 1;
+
 export class Created extends Component {
     static displayName = Created.name;
 
     constructor(props) {
         super(props);
         this.state = {
-            currentCount: 0,
             apiName: '',
             apiDescription: '',
             apiMethod: '',
             apiRequestFormat: '',
-            apiResponseFormat: ''
+            apiResponseFormat: '',
+            requestData: [
+                {
+                    'id': 'req0',
+                    'fieldName': '',
+                    'fieldType': '',
+                    'fieldDesc': ''
+                }
+            ],
+            responseData: [
+                {
+                    'id': 'res0',
+                    'fieldName': '',
+                    'fieldType': '',
+                    'fieldDesc': ''
+                }
+            ]
         };
-        this.incrementCounter = this.incrementCounter.bind(this);
-        this.add = this.add.bind(this);
+
         this.setName = this.setName.bind(this);
         this.changeValue = this.changeValue.bind(this);
-    }
-
-    incrementCounter() {
-        this.setState({
-            currentCount: this.state.currentCount + 1
-        });
+        this.addRequestHtml = this.addRequestHtml.bind(this);
+        this.addResponseHtml = this.addResponseHtml.bind(this);
+        this.deleteRequestHtml = this.deleteRequestHtml.bind(this);
+        this.deleteResponseHtml = this.deleteResponseHtml.bind(this);
+        this.handleRequestData = this.handleRequestData.bind(this);
+        this.handleResponseData = this.handleResponseData.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     add() {
@@ -35,8 +52,8 @@ export class Created extends Component {
             name: this.state.apiName,
             description: this.state.apiDescription,
             apiMethod: this.state.apiMethod,
-            requestFormat: this.state.apiRequestFormat,
-            responseFormat: this.state.apiResponseFormat
+            requestFormat: this.state.requestData,
+            responseFormat: this.state.responseData
         };
         axios.post('https://localhost:5001/api/apimocker/add', request)
             .then(res => {
@@ -54,6 +71,87 @@ export class Created extends Component {
         this.setState({
             [event.target.name]: event.target.value
         });
+    }
+
+    handleRequestData(event) {
+        let list = this.state.requestData;
+        let id = event.currentTarget.parentNode.parentNode.getAttribute('id');
+        let getList = list.filter(function(t) {
+            return t.id === id;
+        });
+        let index = list.findIndex(t => t.id === id);
+        getList[0][event.target.name] = event.target.value;
+
+        list[index] = getList[0];
+        this.setState({
+            requestData: list
+        });
+    }
+
+    handleResponseData(event) {
+        let list = this.state.responseData;
+        let id = event.currentTarget.parentNode.parentNode.getAttribute('id');
+        let getList = list.filter(function (t) {
+            return t.id === id;
+        });
+        let index = list.findIndex(t => t.id === id);
+        getList[0][event.target.name] = event.target.value;
+
+        list[index] = getList[0];
+        this.setState({
+            responseData: list
+        });
+    }
+
+    addRequestHtml() {
+        let id = 'req' + i;
+        i++;
+        let list = this.state.requestData;
+        list.push({ 'id': id, 'fieldName': '', 'fieldType': '', 'fieldDesc': '' });
+        this.setState({ requestData: list });
+    }
+
+    addResponseHtml() {
+        let id = 'res' + j;
+        j++;
+        let list = this.state.responseData;
+        list.push({ 'id': id, 'fieldName': '', 'fieldType': '', 'fieldDesc': '' });
+        this.setState({ responseData: list });
+    }
+
+    deleteRequestHtml(event) {
+        const id = event.currentTarget.parentNode.parentNode.getAttribute("id");
+        let list = this.state.requestData;
+
+        let index = list.findIndex(t => t.id === id);
+        list.splice(index, 1);
+        this.setState({ requestData: list });
+    }
+
+    deleteResponseHtml(event) {
+        const id = event.currentTarget.parentNode.parentNode.getAttribute("id");
+        let list = this.state.responseData;
+
+        let index = list.findIndex(t => t.id === id);
+        list.splice(index, 1);
+        this.setState({ responseData: list });
+    }
+
+    submit() {
+        console.log(this.state.requestData);
+        console.log(this.state.responseData);
+
+        let request = {
+            name: this.state.apiName,
+            description: this.state.apiDescription,
+            apiMethod: this.state.apiMethod,
+            requestFormats: this.state.requestData,
+            responseFormats: this.state.responseData
+        };
+        axios.post('https://localhost:5001/api/apimocker/add', request)
+            .then(res => {
+                console.log(res);
+            });
     }
 
     render() {
@@ -74,25 +172,24 @@ export class Created extends Component {
                 </div>
                 <div>
                     <label>请求参数：</label>
-                    <table>
+                    <table id="requestContent">
                         <tbody>
                         <tr>
                             <th>字段名</th>
                             <th>字段类型</th>
                             <th>字段说明</th>
                         </tr>
-                        <tr>
-                            <td><input /></td>
-                            <td><input /></td>
-                            <td><input /></td>
-                        </tr>
-                        <tr>
-                            <td><input /></td>
-                            <td><input /></td>
-                            <td><input /></td>
-                        </tr>
+                            {this.state.requestData.map((data) => {
+                            return <tr key={data.id} id={data.id}>
+                                       <td><input name="fieldName" onChange={this.handleRequestData}/></td>
+                                       <td><input name="fieldType" onChange={this.handleRequestData}/></td>
+                                       <td><input name="fieldDesc" onChange={this.handleRequestData}/></td>
+                                <td><input type="button" value="删除" onClick={this.deleteRequestHtml} /></td>
+                                   </tr>;
+                        })}
                         </tbody>
                     </table>
+                    <button className="btn btn-primary" onClick={this.addRequestHtml}>添加</button>
                 </div>
                 <div>
                     <label>返回内容：</label>
@@ -103,20 +200,19 @@ export class Created extends Component {
                             <th>字段类型</th>
                             <th>字段说明</th>
                         </tr>
-                        <tr>
-                            <td><input /></td>
-                            <td><input /></td>
-                            <td><input /></td>
-                        </tr>
-                        <tr>
-                            <td><input /></td>
-                            <td><input /></td>
-                            <td><input /></td>
-                        </tr>
+                        {this.state.responseData.map((data) => {
+                            return <tr key={data.id} id={data.id}>
+                               <td><input name="fieldName" onChange={this.handleResponseData} /></td>
+                                <td><input name="fieldType" onChange={this.handleResponseData} /></td>
+                                <td><input name="fieldDesc" onChange={this.handleResponseData} /></td>
+                               <td><input type="button" value="删除" onClick={this.deleteResponseHtml} /></td>
+                            </tr>;
+                        })}
                         </tbody>
                     </table>
+                    <button className="btn btn-primary" onClick={this.addResponseHtml}>添加</button>
                 </div>
-                <button className="btn btn-primary" onClick={this.add}>添加</button>
+                <button className="btn btn-primary" onClick={this.submit}>提交</button>
             </div>
         );
     }

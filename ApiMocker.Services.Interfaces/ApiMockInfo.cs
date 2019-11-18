@@ -14,15 +14,15 @@ namespace ApiMocker.Services.Interfaces
 
         public string RequestFormats { get; set; }
 
-        public string ResponseFormat { get; set; }
+        public string ResponseFormats { get; set; }
     }
 
-    public class RequestFormat
+    public class FieldFormat
     {
-        public string FiledName { get; set; }
+        public string FieldName { get; set; }
 
-        public string Type { get; set; }
+        public string FieldType { get; set; }
 
-        public string Description { get; set; }
+        public string FieldDesc { get; set; }
     }
 }

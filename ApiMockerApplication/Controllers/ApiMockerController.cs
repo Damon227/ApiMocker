@@ -22,7 +22,7 @@ namespace ApiMockerApplication.Controllers
         [HttpPost, Route("add")]
         public async Task<IActionResult> Add([FromBody] CreateApiMockerRequest request)
         {
-            ApiMockInfo result = await _apiMockerService.CreateAsync(request.Name, request.Description, request.ApiMethod, request.RequestFormats, request.ResponseFormat);
+            ApiMockInfo result = await _apiMockerService.CreateAsync(request.Name, request.Description, request.ApiMethod, request.RequestFormats, request.ResponseFormats);
             return Ok(result);
         }
 

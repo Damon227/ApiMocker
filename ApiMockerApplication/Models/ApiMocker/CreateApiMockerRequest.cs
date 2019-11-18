@@ -14,8 +14,8 @@ namespace ApiMockerApplication.Models.ApiMocker
 
         public string ApiMethod { get; set; }
 
-        public List<RequestFormat> RequestFormats { get; set; }
+        public List<FieldFormat> RequestFormats { get; set; }
 
-        public string ResponseFormat { get; set; }
+        public List<FieldFormat> ResponseFormats { get; set; }
     }
 }
