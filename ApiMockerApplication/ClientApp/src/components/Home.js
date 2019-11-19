@@ -6,13 +6,15 @@ export class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:[]
-        }
+            data: []
+        };
+
+        this.details = this.details.bind(this);
     }
     
     componentWillMount() {
-        console.log(process.env);
-        axios.get(process.env.REACT_APP_BASEURL+"api/apimocker/get").then((res) => {
+        //console.log(process.env);
+        axios.get(process.env.REACT_APP_BASEURL + "api/apimocker/get").then((res) => {
             console.log(res);
             this.setState({
                 data: res.data
@@ -22,20 +24,18 @@ export class Home extends Component {
         });
     }
 
-   render() {
-       const elements = [];
-       this.state.data.map((item) => {
-           elements.push(
-               <tr key={item.name}>
-                   <td>{item.name}</td>
-                   <td>{item.description}</td>
-                   <td>{item.apiMethod}</td>
-                   <td>{item.requestFormats}</td>
-                   <td>{item.responseFormats}</td>
-                </tr>
-           );
-       });
+    details(event) {
+        const name = event.currentTarget.getAttribute("name");
+        let detailsData = this.state.data.filter(function(t) { return t.name === name })[0];
 
+        let path = {
+            pathname: '/Details',
+            state: detailsData
+        }
+        this.props.history.push(path);
+    }
+
+   render() {
       return (
       <div>
         <h1>Hello, world!</h1>
@@ -58,12 +58,21 @@ export class Home extends Component {
                           <th width="260">接口名称</th>
                           <th width="200">接口描述</th>
                           <th width="100">接口方法</th>
-                          <th width="300">请求参数</th>
-                          <th width="300">返回内容</th>
+                          <th width="300">操作</th>
                       </tr>
                   </thead>
                 <tbody>
-                      {elements}
+                      {
+                          this.state.data.map((item) => {
+                              return(
+                                  <tr key={item.name}>
+                                      <td>{item.name}</td>
+                                      <td>{item.description}</td>
+                                      <td>{item.apiMethod}</td>
+                                      <td><button name={item.name} onClick={this.details}>详情</button></td>
+                                  </tr>);
+                          })
+                      }
                 </tbody>
             </table>
       </div>

@@ -127,7 +127,7 @@ export class Created extends Component {
             requestFormats: this.state.requestData,
             responseFormats: this.state.responseData
         };
-        axios.post('https://localhost:5001/api/apimocker/add', request)
+        axios.post(process.env.REACT_APP_BASEURL +'api/apimocker/add', request)
             .then(res => {
                 if (res.status === 200) {
                     alert("添加成功");
