@@ -43,24 +43,6 @@ export class Created extends Component {
         this.submit = this.submit.bind(this);
     }
 
-    add() {
-        axios.get("https://localhost:5001/WeatherForecast").then(function(response) {
-            console.log(response);
-        });
-
-        const request = {
-            name: this.state.apiName,
-            description: this.state.apiDescription,
-            apiMethod: this.state.apiMethod,
-            requestFormat: this.state.requestData,
-            responseFormat: this.state.responseData
-        };
-        axios.post('https://localhost:5001/api/apimocker/add', request)
-            .then(res => {
-                console.log(res);
-            });
-    }
-
     setName(event) {
         this.setState({
             apiName: event.target.value
@@ -138,9 +120,6 @@ export class Created extends Component {
     }
 
     submit() {
-        console.log(this.state.requestData);
-        console.log(this.state.responseData);
-
         let request = {
             name: this.state.apiName,
             description: this.state.apiDescription,
@@ -150,7 +129,14 @@ export class Created extends Component {
         };
         axios.post('https://localhost:5001/api/apimocker/add', request)
             .then(res => {
-                console.log(res);
+                if (res.status === 200) {
+                    alert("添加成功");
+                } else {
+                    alert("添加失败");
+                }
+            })
+            .catch(error => {
+                console.log(error);
             });
     }
 

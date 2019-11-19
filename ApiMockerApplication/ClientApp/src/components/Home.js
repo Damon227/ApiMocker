@@ -11,8 +11,8 @@ export class Home extends Component {
     }
     
     componentWillMount() {
-        console.log(1);
-        axios.get("https://localhost:5001/api/apimocker/get").then((res) => {
+        console.log(process.env);
+        axios.get(process.env.REACT_APP_BASEURL+"api/apimocker/get").then((res) => {
             console.log(res);
             this.setState({
                 data: res.data

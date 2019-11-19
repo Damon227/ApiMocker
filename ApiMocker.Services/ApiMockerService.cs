@@ -30,15 +30,15 @@ namespace ApiMocker.Services
                 Description = "获取消息列表",
                 ApiMethod = "GET",
                 RequestFormats = null,
-                ResponseFormats = "{\"messageId\":\"12001\",\"title\":\"账单通知\",\"content\":\"这是消息内容\",\"time\":\"2019-01-01 12:12:42\"}"
+                ResponseFormats = "[{\"fieldName\":\"messageId\",\"fieldType\":\"string\",\"fieldDesc\":\"消息Id\"},{\"fieldName\":\"title\",\"fieldType\":\"string\",\"fieldDesc\":\"消息标题\"},{\"fieldName\":\"content\",\"fieldType\":\"string\",\"fieldDesc\":\"消息内容\"}]"
             });
             data.TryAdd("api/messages/send", new ApiMockInfo
             {
                 Name = "api/message/send",
                 Description = "发送消息",
                 ApiMethod = "POST",
-                RequestFormats = null,
-                ResponseFormats = "{\"messageId\":\"12001\",\"title\":\"账单通知\",\"content\":\"这是消息内容\",\"time\":\"2019-01-01 12:12:42\"}"
+                RequestFormats = "[{\"fieldName\":\"messageId\",\"fieldType\":\"string\",\"fieldDesc\":\"消息Id\"},{\"fieldName\":\"title\",\"fieldType\":\"string\",\"fieldDesc\":\"消息标题\"},{\"fieldName\":\"content\",\"fieldType\":\"string\",\"fieldDesc\":\"消息内容\"}]",
+                ResponseFormats = "[{\"fieldName\":\"messageId\",\"fieldType\":\"string\",\"fieldDesc\":\"消息Id\"},{\"fieldName\":\"title\",\"fieldType\":\"string\",\"fieldDesc\":\"消息标题\"},{\"fieldName\":\"content\",\"fieldType\":\"string\",\"fieldDesc\":\"消息内容\"}]"
             });
 
             return data;
